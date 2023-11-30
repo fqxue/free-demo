@@ -102,12 +102,12 @@ export default () => {
         method: 'POST',
         body: JSON.stringify({
           messages: requestMessageList,
-          time: timestamp,
+          /*time: timestamp,
           pass: storagePassword,
           sign: await generateSignature({
             t: timestamp,
             m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
-          }),
+          }),*/
           temperature: temperature(),
         }),
         signal: controller.signal,
