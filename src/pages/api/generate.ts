@@ -21,20 +21,20 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 400 })
   }
-  /*if (sitePassword && !(sitePassword === pass || passList.includes(pass))) {
+  if (sitePassword && !(sitePassword === pass || passList.includes(pass))) {
     return new Response(JSON.stringify({
       error: {
         message: 'Invalid password.',
       },
     }), { status: 401 })
-  }*/
-  if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '' }, sign)) {
+  }
+  /*if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '' }, sign)) {
     return new Response(JSON.stringify({
       error: {
         message: 'Invalid signature.',
       },
     }), { status: 401 })
-  }
+  }*/
   const initOptions = generatePayload(apiKey, messages, temperature)
   // #vercel-disable-blocks
   if (httpsProxy)
