@@ -13,7 +13,9 @@ const passList = sitePassword.split(',') || []
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
-  const { sign, time, messages, pass, temperature } = body
+  const { messages, temperature } = body
+
+  // 检查消息是否存在
   if (!messages) {
     return new Response(JSON.stringify({
       error: {
@@ -21,28 +23,17 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 400 })
   }
-  if (sitePassword && !(sitePassword === pass || passList.includes(pass))) {
-    return new Response(JSON.stringify({
-      error: {
-        message: 'Invalid password.',
-      },
-    }), { status: 401 })
-  }
-  /*if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '' }, sign)) {
-    return new Response(JSON.stringify({
-      error: {
-        message: 'Invalid signature.',
-      },
-    }), { status: 401 })
-  }*/
+
+  // 移除密码和签名验证
+  // ...
+
   const initOptions = generatePayload(apiKey, messages, temperature)
-  // #vercel-disable-blocks
+
+  // 使用代理（如果有）
   if (httpsProxy)
     initOptions.dispatcher = new ProxyAgent(httpsProxy)
-  // #vercel-end
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
+  // 发起请求
   const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions).catch((err: Error) => {
     console.error(err)
     return new Response(JSON.stringify({
@@ -53,5 +44,6 @@ export const post: APIRoute = async(context) => {
     }), { status: 500 })
   }) as Response
 
+  // 返回响应
   return parseOpenAIStream(response) as Response
 }
