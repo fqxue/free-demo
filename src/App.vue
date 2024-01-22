@@ -25,7 +25,12 @@
     </div>
 
     <div class="input-area">
-      <input v-model="userInput" type="text" class="input-field" />
+      <input
+        v-model="userInput"
+        type="text"
+        class="input-field"
+        placeholder="输入你的问题"
+      />
       <button @click="sendMessage" class="send-button">发送</button>
     </div>
   </div>
@@ -37,6 +42,8 @@
 <style>
 * {
   box-sizing: border-box; /* 确保所有元素的盒模型不会因边框和内边距而增加尺寸 */
+  padding: 0;
+  margin: 0;
 }
 
 .chat-container {
