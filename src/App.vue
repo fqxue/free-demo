@@ -47,7 +47,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 95vh;
+  height: 100vh;
 }
 
 .messages {
@@ -144,12 +144,12 @@
 }
 
 .donut {
-  margin: 5px auto;
+  margin: auto;
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: #59a782;
   border-radius: 50%;
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   animation: donut-spin 1.2s linear infinite;
 }
 </style>
