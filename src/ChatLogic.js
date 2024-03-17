@@ -29,24 +29,22 @@ export default {
           // GPT API请求
           data = {
             messages: messages.value,
+            stream: false,
+            //model: "gpt-3.5-turbo-16k",
             model: "gpt-3.5-turbo-16k",
-            temperature: 0.7,
-            presence_penalty: 0,
           };
 
           response = await fetch(gptApiUrl, {
             headers: {
-              accept: "text/event-stream",
               "content-type": "application/json",
-              "x-requested-with": "XMLHttpRequest",
-              Referer: "https://124389964761.ai701.live/",
             },
             body: JSON.stringify(data),
             method: "POST",
           });
 
-          const result = await response.json();
-          content = result.choices[0].message.content;
+          const result = await response.text();
+          //content = result.choices[0].message.content;
+          content = result;
         } else {
           // 其他API请求
           response = await fetch(
@@ -54,6 +52,7 @@ export default {
           );
           const result = await response.json();
           content = result.data.output;
+          console.log(content);
         }
 
         messages.value.push({ role: "assistant", content: content });

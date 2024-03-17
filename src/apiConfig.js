@@ -7,4 +7,4 @@ export const apiMap = {
   病变女友_黑雨AI: "https://api.lolimi.cn/API/AI/bj.php",
 };
 
-export const gptApiUrl = "https://openai.lbbai.cc/v1/chat/completions";
+export const gptApiUrl = "https://y-tian-plugin.top:8080/v1/chat/completions";
